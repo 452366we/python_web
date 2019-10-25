@@ -1,4 +1,4 @@
-"""mydjproject URL Configuration
+"""mfresh_api URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
@@ -13,20 +13,29 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+#from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
-from user.views import userLogin,userRegister
+
+from user.views import userLogin,userRegister,userCheckUname,userCheckPhone
+from news.views import newsList,newsDetail
 from product.views import productList,productDetail
+from cart.views import cartDetailAdd,cartDetailList,cartDetailDelete,cartDetailUpdate
+
+from user.models import MfUser
 
 def handleHome(req):
-    res=HttpResponse('<h2>welcome home!</h2><hr>')
+    res=HttpResponse('<h1>welcome to mfresh!</h1><hr>')
     return res
 
 urlpatterns = [
     path('',handleHome),
     path('user/login',userLogin),
     path('user/register',userRegister),
+    path('user/check/uname',userCheckUname),
+    path('user/check/phone',userCheckPhone),
+    path('news/list',newsList),
+    path('news/detail',newsDetail),
     path('product/list',productList),
-    path('product/detail/<pid>',productDetail)
+    path('product/detail',productDetail)
 ]
